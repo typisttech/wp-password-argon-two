@@ -35,7 +35,8 @@ class Manager
      * @param PasswordLock         $passwordLock
      * @param ValidatorInterface[] $validators
      */
-    public function __construct(PasswordLock $passwordLock, ValidatorInterface ...$validators) {
+    public function __construct(PasswordLock $passwordLock, ValidatorInterface ...$validators)
+    {
         $this->passwordLock = $passwordLock;
         $this->validators = $validators;
     }
@@ -48,11 +49,11 @@ class Manager
             }
 
             throw new LogicException('WP Password Argon Two: Required constant `' . $constantName . '` not defined.');
-        }, ['WP_PASSWORD_ARGON_TWO_PEPPER', 'WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS','WP_PASSWORD_ARGON_TWO_OPTIONS',]);
+        }, ['WP_PASSWORD_ARGON_TWO_PEPPER', 'WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS', 'WP_PASSWORD_ARGON_TWO_OPTIONS']);
 
         $passwordLock = new PasswordLock(WP_PASSWORD_ARGON_TWO_PEPPER, WP_PASSWORD_ARGON_TWO_OPTIONS);
 
-        $validators = array_map(function(string $pepper): ValidatorInterface {
+        $validators = array_map(function (string $pepper): ValidatorInterface {
             return new Validator($pepper);
         }, (array) WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS);
 
@@ -69,7 +70,7 @@ class Manager
 
         $isValid = array_reduce(
             $this->validators,
-            function(bool $carry, ValidatorInterface $validator) use ($password, $ciphertext): bool {
+            function (bool $carry, ValidatorInterface $validator) use ($password, $ciphertext): bool {
                 return $carry || $validator->isValid($password, $ciphertext);
             },
             false
