@@ -6,13 +6,8 @@ namespace TypistTech\WPPasswordArgonTwo;
 
 use PasswordHash;
 
-class FallbackPasswordLock
+class WordPressValidator implements ValidatorInterface
 {
-    public static function make(): self
-    {
-        return new self();
-    }
-
     /**
      * The original `wp_check_password` of WordPress v4.9.4 without rehashing.
      *

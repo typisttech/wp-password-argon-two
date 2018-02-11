@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace TypistTech\WPPasswordArgonTwo;
 
-use LogicException;
-
-class PasswordLock
+class PasswordLock implements ValidatorInterface
 {
     private const HASH_HMAC_ALGO = 'sha512';
     private const PASSWORD_HASH_ALGO = PASSWORD_ARGON2I;
@@ -29,25 +27,12 @@ class PasswordLock
      * PasswordLock constructor.
      *
      * @param string $pepper  Shared secret key used for generating the HMAC variant of the message digest.
-     * @param array  $options Password hash options.
+     * @param array  $options Password hash options for Argon2i.
      */
     public function __construct(string $pepper, array $options)
     {
         $this->pepper = $pepper;
         $this->options = $options;
-    }
-
-    public static function make(): self
-    {
-        array_map(function (string $constantName): void {
-            if (defined($constantName)) {
-                return;
-            }
-
-            throw new LogicException('WP Password Argon Two: Required constant `' . $constantName . '` not defined.');
-        }, ['WP_PASSWORD_ARGON_TWO_PEPPER', 'WP_PASSWORD_ARGON_TWO_OPTIONS',]);
-
-        return new self(WP_PASSWORD_ARGON_TWO_PEPPER, WP_PASSWORD_ARGON_TWO_OPTIONS);
     }
 
     /**
