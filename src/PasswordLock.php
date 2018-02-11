@@ -4,17 +4,9 @@ declare(strict_types=1);
 
 namespace TypistTech\WPPasswordArgonTwo;
 
-class PasswordLock implements ValidatorInterface
+class PasswordLock extends Validator
 {
-    private const HASH_HMAC_ALGO = 'sha512';
     private const PASSWORD_HASH_ALGO = PASSWORD_ARGON2I;
-
-    /**
-     * Shared secret key used for generating the HMAC variant of the message digest.
-     *
-     * @var string
-     */
-    private $pepper;
 
     /**
      * Password hash options.
@@ -31,24 +23,9 @@ class PasswordLock implements ValidatorInterface
      */
     public function __construct(string $pepper, array $options)
     {
-        $this->pepper = $pepper;
-        $this->options = $options;
-    }
+        parent::__construct($pepper);
 
-    /**
-     * Validate user submitted password.
-     *
-     * @param string $password   The user's password in plain text.
-     * @param string $ciphertext The double hashed password from database.
-     *
-     * @return bool
-     */
-    public function isValid(string $password, string $ciphertext): bool
-    {
-        return password_verify(
-            $this->hmac($password),
-            $ciphertext
-        );
+        $this->options = $options;
     }
 
     /**
@@ -78,10 +55,5 @@ class PasswordLock implements ValidatorInterface
             self::PASSWORD_HASH_ALGO,
             $this->options
         );
-    }
-
-    private function hmac(string $password): string
-    {
-        return hash_hmac(self::HASH_HMAC_ALGO, $password, $this->pepper);
     }
 }
