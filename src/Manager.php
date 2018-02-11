@@ -9,13 +9,25 @@ use LogicException;
 class Manager
 {
     /**
+     * The main Argon2i password lock.
+     *
      * @var PasswordLock
      */
     private $passwordLock;
+
     /**
+     * Fallback password validators.
+     *
      * @var ValidatorInterface[]
      */
     private $validators;
+
+    /**
+     * Whether the ciphertext needs rehash.
+     *
+     * @var bool
+     */
+    private $needsRehash = false;
 
     /**
      * Manager constructor.
@@ -23,10 +35,7 @@ class Manager
      * @param PasswordLock         $passwordLock
      * @param ValidatorInterface[] $validators
      */
-    public function __construct(
-        PasswordLock $passwordLock,
-        ValidatorInterface ...$validators
-    ) {
+    public function __construct(PasswordLock $passwordLock, ValidatorInterface ...$validators) {
         $this->passwordLock = $passwordLock;
         $this->validators = $validators;
     }
@@ -39,44 +48,43 @@ class Manager
             }
 
             throw new LogicException('WP Password Argon Two: Required constant `' . $constantName . '` not defined.');
-        }, ['WP_PASSWORD_ARGON_TWO_PEPPER', 'WP_PASSWORD_ARGON_TWO_OPTIONS',]);
-
+        }, ['WP_PASSWORD_ARGON_TWO_PEPPER', 'WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS','WP_PASSWORD_ARGON_TWO_OPTIONS',]);
 
         $passwordLock = new PasswordLock(WP_PASSWORD_ARGON_TWO_PEPPER, WP_PASSWORD_ARGON_TWO_OPTIONS);
-        $validators = [
-            new WordPressValidator(),
-        ];
+
+        $validators = array_map(function(string $pepper): ValidatorInterface {
+            return new Validator($pepper);
+        }, (array) WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS);
+
+        $validators[] = new WordPressValidator();
 
         return new self($passwordLock, ...$validators);
     }
 
     public function isValid(string $password, string $ciphertext): bool
     {
-        return array_reduce(
-            $this->getValidators(),
+        if ($this->passwordLock->isValid($password, $ciphertext)) {
+            return true;
+        }
+
+        $isValid = array_reduce(
+            $this->validators,
             function(bool $carry, ValidatorInterface $validator) use ($password, $ciphertext): bool {
                 return $carry || $validator->isValid($password, $ciphertext);
             },
             false
         );
-    }
 
-    /**
-     * PasswordValidator getter.
-     *
-     * @return ValidatorInterface[]
-     */
-    private function getValidators(): array
-    {
-        return array_merge(
-            [$this->passwordLock],
-            $this->validators
-        );
+        if ($isValid) {
+            $this->needsRehash = true;
+        }
+
+        return $isValid;
     }
 
     public function needsRehash(string $ciphertext): bool
     {
-        return $this->passwordLock->needsRehash($ciphertext);
+        return $this->needsRehash || $this->passwordLock->needsRehash($ciphertext);
     }
 
     /**
