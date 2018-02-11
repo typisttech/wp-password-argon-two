@@ -91,55 +91,55 @@ class WPCheckPasswordTest extends WPTestCase
     /** @test */
     public function it_checks_correct_bcrypt_hash()
     {
-        $this->assertCorrectPassword('bcryptuser', self::DUMMY_PASSWORD, self::BCRYPT_HASH);
+        $this->assertCorrectPassword('bcrypt_user', self::DUMMY_PASSWORD, self::BCRYPT_HASH);
     }
 
     /** @test */
     public function it_checks_incorrect_bcrypt_hash()
     {
-        $this->assertIncorrectPassword('bcryptuser', 'incorrectPassword', self::BCRYPT_HASH);
+        $this->assertIncorrectPassword('bcrypt_user', 'incorrectPassword', self::BCRYPT_HASH);
     }
 
     /** @test */
     public function it_rehash_bcrypt_hash()
     {
-        $this->assertRehashToArgon2i('bcryptuser', self::DUMMY_PASSWORD, self::BCRYPT_HASH);
+        $this->assertRehashToArgon2i('bcrypt_user', self::DUMMY_PASSWORD, self::BCRYPT_HASH);
     }
 
     /** @test */
     public function it_checks_correct_md5_hash()
     {
-        $this->assertCorrectPassword('md5user', self::DUMMY_PASSWORD, self::MD5_HASH);
+        $this->assertCorrectPassword('md5_user', self::DUMMY_PASSWORD, self::MD5_HASH);
     }
 
     /** @test */
     public function it_checks_incorrect_md5_hash()
     {
-        $this->assertIncorrectPassword('md5user', 'incorrectPassword', self::MD5_HASH);
+        $this->assertIncorrectPassword('md5_user', 'incorrectPassword', self::MD5_HASH);
     }
 
     /** @test */
     public function it_rehash_md5_hash()
     {
-        $this->assertRehashToArgon2i('md5user', self::DUMMY_PASSWORD, self::MD5_HASH);
+        $this->assertRehashToArgon2i('md5_user', self::DUMMY_PASSWORD, self::MD5_HASH);
     }
 
     /** @test */
     public function it_checks_correct_phpass_hash()
     {
-        $this->assertCorrectPassword('phpassuser', self::DUMMY_PASSWORD, self::PHPASS_HASH);
+        $this->assertCorrectPassword('phpass_user', self::DUMMY_PASSWORD, self::PHPASS_HASH);
     }
 
     /** @test */
     public function it_checks_incorrect_phpass_hash()
     {
-        $this->assertIncorrectPassword('phpassuser', 'incorrectPassword', self::PHPASS_HASH);
+        $this->assertIncorrectPassword('phpass_user', 'incorrectPassword', self::PHPASS_HASH);
     }
 
     /** @test */
     public function it_rehash_phpass_hash()
     {
-        $this->assertRehashToArgon2i('phpassuser', self::DUMMY_PASSWORD, self::PHPASS_HASH);
+        $this->assertRehashToArgon2i('phpass_user', self::DUMMY_PASSWORD, self::PHPASS_HASH);
     }
 
     private function assertCorrectPassword(string $login, string $password, string $ciphertext)
