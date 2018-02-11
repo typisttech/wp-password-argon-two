@@ -1,0 +1,31 @@
+# Codeception Test Suite Configuration
+#
+# Suite for unit or integration tests that require WordPress functions and classes.
+
+actor: WpunitTester
+modules:
+    enabled:
+        - WPDb
+        - WPLoader
+        - \TypistTech\WPPasswordArgonTwo\Helper\Wpunit
+    config:
+        WPDb:
+            dsn: 'mysql:host=127.0.0.1;dbname=wordpress'
+            user: 'root'
+            password: ''
+            tablePrefix: 'wp_'
+            dump: 'tests/_data/dump.sql'
+            populate: true
+            cleanup: true
+            url: 'http://wp.dev:8080'
+            urlReplacement: true
+        WPLoader:
+            loadOnly: true
+            wpRootFolder: '/tmp/wordpress'
+            dbName: 'wordpress'
+            dbHost: '127.0.0.1'
+            dbUser: 'root'
+            dbPassword: ''
+            domain: 'wordpress.dev'
+coverage:
+    enabled: true
