@@ -24,9 +24,9 @@ class WPSetPasswordTest extends WPTestCase
     public function it_saves_argon2i_hashed_ciphertext()
     {
         $userId = wp_create_user(
-            'tesing_it_saves_argon2i_hashed_ciphertext',
+            'testing_it_saves_argon2i_hashed_ciphertext',
             'old_password',
-            'tesing_it_saves_argon2i_hashed_ciphertext@exmaple.com'
+            'testing_it_saves_argon2i_hashed_ciphertext@exmaple.com'
         );
 
         wp_set_password('new-password', $userId);
@@ -44,9 +44,9 @@ class WPSetPasswordTest extends WPTestCase
     public function its_ciphertext_can_be_checked()
     {
         $userId = wp_create_user(
-            'tesing_its_ciphertext_can_be_checked',
+            'testing_its_ciphertext_can_be_checked',
             'old_password',
-            'tesing_its_ciphertext_can_be_checked@exmaple.com'
+            'testing_its_ciphertext_can_be_checked@exmaple.com'
         );
 
         $password = 'some-password';
