@@ -15,6 +15,14 @@ class PasswordLockTest extends WPTestCase
     private const BCRYPT_HASH = '$2y$10$EkVBmTI0cbPvPdnTYeVk8eIt6qpHk09C8DB5iZwHbYBu5ot2PyAnq';
 
     /** @test */
+    public function it_implements_password_validator_interface()
+    {
+        $passwordLock = new PasswordLock(self::DUMMY_PEPPER, []);
+
+        $this->assertInstanceOf(ValidatorInterface::class, $passwordLock);
+    }
+
+    /** @test */
     public function it_hashes_with_argon2i()
     {
         $passwordLock = new PasswordLock(self::DUMMY_PEPPER, []);

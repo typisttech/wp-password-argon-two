@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-use TypistTech\WPPasswordArgonTwo\FallbackPasswordLock;
-use TypistTech\WPPasswordArgonTwo\PasswordLock;
+use TypistTech\WPPasswordArgonTwo\Manager;
 
 /**
  * Checks the plaintext password against the hashed Password.
@@ -16,15 +15,10 @@ use TypistTech\WPPasswordArgonTwo\PasswordLock;
  */
 function wp_check_password(string $password, string $ciphertext, $userId = null): bool
 {
-    $passwordLock = PasswordLock::make();
-    $isValid = $passwordLock->isValid($password, $ciphertext);
+    $manager = Manager::make();
+    $isValid = $manager->isValid($password, $ciphertext);
 
-    if (! $isValid) {
-        $fallbackPasswordLock = FallbackPasswordLock::make();
-        $isValid = $fallbackPasswordLock->isValid($password, $ciphertext);
-    }
-
-    if ($isValid && is_numeric($userId) && $passwordLock->needsRehash($ciphertext)) {
+    if ($isValid && is_numeric($userId) && $manager->needsRehash($ciphertext)) {
         $ciphertext = wp_set_password($password, (int) $userId);
     }
 
@@ -40,9 +34,9 @@ function wp_check_password(string $password, string $ciphertext, $userId = null)
  */
 function wp_hash_password(string $password): string
 {
-    $passwordLock = PasswordLock::make();
+    $manager = Manager::make();
 
-    return $passwordLock->hash($password);
+    return $manager->hash($password);
 }
 
 /**
