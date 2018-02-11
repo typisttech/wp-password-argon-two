@@ -13,10 +13,8 @@ class WPHashPasswordTest extends WPTestCase
     {
         $ciphertext = wp_hash_password('testing_it_returns_argon2i_hashed_ciphertext');
 
-        $info = password_get_info($ciphertext);
-        $this->assertSame(
-            'argon2i',
-            $info['algoName']
+        $this->assertFalse(
+            password_needs_rehash($ciphertext, PASSWORD_ARGON2I, WP_PASSWORD_ARGON_TWO_OPTIONS)
         );
     }
 
