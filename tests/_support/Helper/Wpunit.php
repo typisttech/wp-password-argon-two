@@ -15,18 +15,18 @@ class Wpunit extends Module
     {
         parent::_beforeSuite($settings);
 
-        if (! defined('WP_PASSWORD_ARGON_TWO_PEPPER')) {
+        if (!defined('WP_PASSWORD_ARGON_TWO_PEPPER')) {
             define('WP_PASSWORD_ARGON_TWO_PEPPER', 'my-pepper');
         }
 
-        if (! defined('WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS')) {
+        if (!defined('WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS')) {
             define('WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS', [
                 'my-second-pepper',
                 'my-third-pepper',
             ]);
         }
 
-        if (! defined('WP_PASSWORD_ARGON_TWO_OPTIONS')) {
+        if (!defined('WP_PASSWORD_ARGON_TWO_OPTIONS')) {
             define('WP_PASSWORD_ARGON_TWO_OPTIONS', []);
         }
     }

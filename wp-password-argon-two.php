@@ -6,11 +6,10 @@
  * Author:      Typist Tech
  * Author URI:  https://typist.tech
  * Version:     0.1.0
- * Licence:     MIT
+ * Licence:     MIT.
  */
-
 declare(strict_types=1);
 
-require_once WPMU_PLUGIN_DIR . '/src/FallbackPasswordLock.php';
-require_once WPMU_PLUGIN_DIR . '/src/PasswordLock.php';
-require_once WPMU_PLUGIN_DIR . '/src/pluggable.php';
+require_once WPMU_PLUGIN_DIR.'/src/FallbackPasswordLock.php';
+require_once WPMU_PLUGIN_DIR.'/src/PasswordLock.php';
+require_once WPMU_PLUGIN_DIR.'/src/pluggable.php';

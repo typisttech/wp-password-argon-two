@@ -176,12 +176,12 @@ class WPCheckPasswordTest extends WPTestCase
     private function haveUserInDatabase(string $login, string $ciphertext)
     {
         $this->tester->haveOrUpdateInDatabase('wp_users', [
-            'user_login' => $login,
-            'user_pass' => $ciphertext,
-            'user_nicename' => $login,
-            'user_email' => $login . '@wp.dev',
+            'user_login'      => $login,
+            'user_pass'       => $ciphertext,
+            'user_nicename'   => $login,
+            'user_email'      => $login.'@wp.dev',
             'user_registered' => '2018-01-01 00:00:00',
-            'display_name' => $login,
+            'display_name'    => $login,
         ]);
     }
 }

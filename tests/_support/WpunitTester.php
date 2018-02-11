@@ -7,7 +7,8 @@ namespace TypistTech\WPPasswordArgonTwo;
 use Codeception\Actor;
 
 /**
- * Inherited Methods
+ * Inherited Methods.
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -20,12 +21,12 @@ use Codeception\Actor;
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
 class WpunitTester extends Actor
 {
     use _generated\WpunitTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+    /*
+     * Define custom actions here
+     */
 }
