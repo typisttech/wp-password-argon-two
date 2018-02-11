@@ -15,11 +15,19 @@ class PasswordLockTest extends WPTestCase
     private const BCRYPT_HASH = '$2y$10$EkVBmTI0cbPvPdnTYeVk8eIt6qpHk09C8DB5iZwHbYBu5ot2PyAnq';
 
     /** @test */
-    public function it_implements_password_validator_interface()
+    public function it_implements_validator_interface()
     {
         $passwordLock = new PasswordLock(self::DUMMY_PEPPER, []);
 
         $this->assertInstanceOf(ValidatorInterface::class, $passwordLock);
+    }
+
+    /** @test */
+    public function it_extends_validator()
+    {
+        $passwordLock = new PasswordLock(self::DUMMY_PEPPER, []);
+
+        $this->assertInstanceOf(Validator::class, $passwordLock);
     }
 
     /** @test */
@@ -34,28 +42,6 @@ class PasswordLockTest extends WPTestCase
             'argon2i',
             $info['algoName']
         );
-    }
-
-    /** @test */
-    public function it_checks_correct_password()
-    {
-        $passwordLock = new PasswordLock(self::DUMMY_PEPPER, []);
-        $ciphertext = $passwordLock->hash(self::DUMMY_PASSWORD);
-
-        $isValid = $passwordLock->isValid(self::DUMMY_PASSWORD, $ciphertext);
-
-        $this->assertTrue($isValid);
-    }
-
-    /** @test */
-    public function it_checks_incorrect_password()
-    {
-        $passwordLock = new PasswordLock(self::DUMMY_PEPPER, []);
-        $ciphertext = $passwordLock->hash(self::DUMMY_PASSWORD);
-
-        $isValid = $passwordLock->isValid('incorrect password', $ciphertext);
-
-        $this->assertFalse($isValid);
     }
 
     /** @test */
