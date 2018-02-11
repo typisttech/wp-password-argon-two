@@ -51,7 +51,7 @@ class PasswordLockTest extends WPTestCase
         $passwordLock = new PasswordLock(self::DUMMY_PEPPER, []);
 
         $isValid = $passwordLock->isValid(
-            substr($longPassword, 0, -1) . 'a',
+            substr($longPassword, 0, -1).'a',
             $passwordLock->hash($longPassword)
         );
 
@@ -77,8 +77,8 @@ class PasswordLockTest extends WPTestCase
     {
         $oldOptions = [
             'memory_cost' => 1 << 17, // 128 Mb
-            'time_cost' => 2,
-            'threads' => 1,
+            'time_cost'   => 2,
+            'threads'     => 1,
         ];
         $newOptions = array_merge($oldOptions, ['time_cost' => 3]);
 
@@ -97,8 +97,8 @@ class PasswordLockTest extends WPTestCase
     {
         $options = [
             'memory_cost' => 1 << 17, // 128 Mb
-            'time_cost' => 2,
-            'threads' => 1,
+            'time_cost'   => 2,
+            'threads'     => 1,
         ];
 
         $oldPasswordLock = new PasswordLock(self::DUMMY_PEPPER, $options);
