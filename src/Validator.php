@@ -18,7 +18,7 @@ class Validator implements ValidatorInterface
     /**
      * PasswordLock constructor.
      *
-     * @param string $pepper  Shared secret key used for generating the HMAC variant of the message digest.
+     * @param string $pepper Shared secret key used for generating the HMAC variant of the message digest.
      */
     public function __construct(string $pepper)
     {
