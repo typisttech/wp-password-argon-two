@@ -12,6 +12,7 @@ class WPCheckPasswordTest extends WPTestCase
 
     // Pepper is defined in TypistTech\WPPasswordArgonTwo\Helper\Wpunit.
     private const ARGON_TWO_HASH = '$argon2i$v=19$m=1024,t=2,p=2$NHE3Vm5aeE8vRExBcVpieA$hf23XqOpqT403Ya0U+Bd+4JhYlMAgNEvFx/CisPkrX4';
+    private const ARGON_TWO_OUTDATED_OPTIONS_HASH = '$argon2i$v=19$m=131072,t=4,p=3$c3drNFJrU21EcjNESUw4ZQ$KboA2MZFKh/O0UEl6T8eMLeEihbWKY6Efeu9TRkbdJM';
     // Fallback pepper is 'my-second-pepper';
     private const ARGON_TWO_FALLBACK_PEPPER_HASH = '$argon2i$v=19$m=1024,t=2,p=2$TUFxYm5XSkJ1b29YLmI5Mg$qn5gHvOEVi1Ixenu7Uax8VWMwu5JW6mM0Ob/kJBwB2A';
     private const BCRYPT_HASH = '$2y$10$EkVBmTI0cbPvPdnTYeVk8eIt6qpHk09C8DB5iZwHbYBu5ot2PyAnq';
@@ -37,6 +38,29 @@ class WPCheckPasswordTest extends WPTestCase
         $user = get_user_by('login', 'argon2user');
         $this->assertSame(
             self::ARGON_TWO_HASH,
+            $user->user_pass
+        );
+    }
+
+    /** @test */
+    public function it_checks_correct_argon2_outdated_options_hash()
+    {
+        $this->assertCorrectPassword('argon2_outdated_options_user', self::DUMMY_PASSWORD, self::ARGON_TWO_OUTDATED_OPTIONS_HASH);
+    }
+
+    /** @test */
+    public function it_checks_incorrect_argon2_outdated_options_hash()
+    {
+        $this->assertIncorrectPassword('argon2_outdated_options_user', 'incorrectPassword', self::ARGON_TWO_OUTDATED_OPTIONS_HASH);
+    }
+
+    /** @test */
+    public function it_rehash_argon2_outdated_options_hash()
+    {
+        $this->assertRehashToArgon2i('argon2_outdated_options_user', self::DUMMY_PASSWORD, self::ARGON_TWO_OUTDATED_OPTIONS_HASH);
+        $user = get_user_by('login', 'argon2_outdated_options_user');
+        $this->assertNotSame(
+            self::ARGON_TWO_OUTDATED_OPTIONS_HASH,
             $user->user_pass
         );
     }
@@ -144,10 +168,8 @@ class WPCheckPasswordTest extends WPTestCase
         wp_check_password($password, $ciphertext, $user->ID);
 
         $user = get_user_by('login', $login);
-        $info = password_get_info($user->user_pass);
-        $this->assertSame(
-            'argon2i',
-            $info['algoName']
+        $this->assertFalse(
+            password_needs_rehash($user->user_pass, PASSWORD_ARGON2I, WP_PASSWORD_ARGON_TWO_OPTIONS)
         );
     }
 
