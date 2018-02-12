@@ -41,5 +41,8 @@
         "files": [
             "src/pluggable.php"
         ]
+    },
+    "scripts": {
+      "test": "codecept run wpunit"
     }
 }
