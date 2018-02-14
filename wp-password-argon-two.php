@@ -11,6 +11,10 @@
 
 declare(strict_types=1);
 
-require_once WPMU_PLUGIN_DIR . '/src/FallbackPasswordLock.php';
-require_once WPMU_PLUGIN_DIR . '/src/PasswordLock.php';
-require_once WPMU_PLUGIN_DIR . '/src/pluggable.php';
+// Order matters.
+require_once __DIR__ . '/src/ValidatorInterface.php';
+require_once __DIR__ . '/src/Validator.php';
+require_once __DIR__ . '/src/WordPressValidator.php';
+require_once __DIR__ . '/src/PasswordLock.php';
+require_once __DIR__ . '/src/Manager.php';
+require_once __DIR__ . '/src/pluggable.php';
