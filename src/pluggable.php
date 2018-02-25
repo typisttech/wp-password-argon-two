@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use TypistTech\WPPasswordArgonTwo\Manager;
+use TypistTech\WPPasswordArgonTwo\ManagerFactory;
 
 /**
  * Checks the plaintext password against the hashed Password.
@@ -15,7 +15,7 @@ use TypistTech\WPPasswordArgonTwo\Manager;
  */
 function wp_check_password(string $password, string $ciphertext, $userId = null): bool
 {
-    $manager = Manager::make();
+    $manager = ManagerFactory::make();
     $isValid = $manager->isValid($password, $ciphertext);
 
     if ($isValid && is_numeric($userId) && $manager->needsRehash($ciphertext)) {
@@ -34,7 +34,7 @@ function wp_check_password(string $password, string $ciphertext, $userId = null)
  */
 function wp_hash_password(string $password): string
 {
-    $manager = Manager::make();
+    $manager = ManagerFactory::make();
 
     return $manager->hash($password);
 }

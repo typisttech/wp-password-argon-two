@@ -17,4 +17,5 @@ require_once __DIR__ . '/src/Validator.php';
 require_once __DIR__ . '/src/WordPressValidator.php';
 require_once __DIR__ . '/src/PasswordLock.php';
 require_once __DIR__ . '/src/Manager.php';
+require_once __DIR__ . '/src/ManagerFactory.php';
 require_once __DIR__ . '/src/pluggable.php';
