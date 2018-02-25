@@ -9,7 +9,7 @@ use Codeception\TestCase\WPTestCase;
 class ManagerFactoryTest extends WPTestCase
 {
     /** @test */
-    public function it_make_a_manager_instance()
+    public function it_makes_a_manager_instance()
     {
         $actual = ManagerFactory::make();
 
