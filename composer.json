@@ -36,7 +36,8 @@
         "php": "^7.2"
     },
     "require-dev": {
-        "lucatume/wp-browser": "^1.22"
+        "lucatume/wp-browser": "^1.22",
+        "phpunit/phpunit": "^6.5"
     },
     "autoload": {
         "psr-4": {
