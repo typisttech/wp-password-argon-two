@@ -10,7 +10,7 @@ interface ValidatorInterface
      * Validate user submitted password.
      *
      * @param string $password   The user's password in plain text.
-     * @param string $ciphertext The double hashed password from database.
+     * @param string $ciphertext Hash of the user's password to check against.
      *
      * @return bool
      */
