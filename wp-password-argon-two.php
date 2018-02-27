@@ -11,13 +11,14 @@
 
 declare(strict_types=1);
 
-// Installing as a Must-use Plugin is the last resort.
+// Installing as a must-use plugin is the last resort.
 // You should use composer autoload whenever possible.
 
 // Order matters.
 require_once __DIR__ . '/src/ValidatorInterface.php';
 require_once __DIR__ . '/src/Validator.php';
-require_once __DIR__ . '/src/WordPressValidator.php';
+require_once __DIR__ . '/src/PhpassValidator.php';
+require_once __DIR__ . '/src/MDFiveValidator.php';
 require_once __DIR__ . '/src/PasswordLock.php';
 require_once __DIR__ . '/src/Manager.php';
 require_once __DIR__ . '/src/ManagerFactory.php';

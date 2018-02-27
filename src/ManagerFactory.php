@@ -23,7 +23,8 @@ class ManagerFactory
             return new Validator($pepper);
         }, (array) WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS);
 
-        $validators[] = new WordPressValidator();
+        $validators[] = new PhpassValidator();
+        $validators[] = new MDFiveValidator();
 
         return new Manager($passwordLock, ...$validators);
     }
