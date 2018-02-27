@@ -15,17 +15,17 @@ class ValidatorTest extends WPTestCase
     /** @test */
     public function it_implements_password_validator_interface()
     {
-        $passwordLock = new Validator(self::DUMMY_PEPPER);
+        $validator = new Validator(self::DUMMY_PEPPER);
 
-        $this->assertInstanceOf(ValidatorInterface::class, $passwordLock);
+        $this->assertInstanceOf(ValidatorInterface::class, $validator);
     }
 
     /** @test */
     public function it_checks_correct_password()
     {
-        $passwordLock = new Validator(self::DUMMY_PEPPER);
+        $validator = new Validator(self::DUMMY_PEPPER);
 
-        $isValid = $passwordLock->isValid(self::DUMMY_PASSWORD, self::DUMMY_CIPHERTEXT);
+        $isValid = $validator->isValid(self::DUMMY_PASSWORD, self::DUMMY_CIPHERTEXT);
 
         $this->assertTrue($isValid);
     }
@@ -33,9 +33,9 @@ class ValidatorTest extends WPTestCase
     /** @test */
     public function it_checks_incorrect_password()
     {
-        $passwordLock = new Validator(self::DUMMY_PEPPER);
+        $validator = new Validator(self::DUMMY_PEPPER);
 
-        $isValid = $passwordLock->isValid('incorrect password', self::DUMMY_CIPHERTEXT);
+        $isValid = $validator->isValid('incorrect password', self::DUMMY_CIPHERTEXT);
 
         $this->assertFalse($isValid);
     }
