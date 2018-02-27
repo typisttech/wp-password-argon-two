@@ -1,8 +1,18 @@
 # Change Log
 
-## [0.1.0](https://github.com/TypistTech/wp-password-argon-two/tree/0.1.0) (2018-02-28)
+## [0.2.0](https://github.com/TypistTech/wp-password-argon-two/tree/0.2.0) (2018-02-28)
+[Full Changelog](https://github.com/TypistTech/wp-password-argon-two/compare/0.1.0...0.2.0)
+
 **Merged pull requests:**
 
+- Readme: Better English [\#16](https://github.com/TypistTech/wp-password-argon-two/pull/16) ([TangRufus](https://github.com/TangRufus))
+- Extract `PhpassValidator` and `MDFiveValidator` from `WordPressValidator` [\#15](https://github.com/TypistTech/wp-password-argon-two/pull/15) ([TangRufus](https://github.com/TangRufus))
+- Create LICENSE [\#14](https://github.com/TypistTech/wp-password-argon-two/pull/14) ([TangRufus](https://github.com/TangRufus))
+
+## [0.1.0](https://github.com/TypistTech/wp-password-argon-two/tree/0.1.0) (2018-02-27)
+**Merged pull requests:**
+
+- Version bump 0.1.0 [\#13](https://github.com/TypistTech/wp-password-argon-two/pull/13) ([TangRufus](https://github.com/TangRufus))
 - Add `README.md` [\#12](https://github.com/TypistTech/wp-password-argon-two/pull/12) ([TangRufus](https://github.com/TangRufus))
 - Ensure PHP compiled with Argon2 and required constants are defined [\#11](https://github.com/TypistTech/wp-password-argon-two/pull/11) ([TangRufus](https://github.com/TangRufus))
 - Fix mu plugin `require\_once` paths [\#9](https://github.com/TypistTech/wp-password-argon-two/pull/9) ([TangRufus](https://github.com/TangRufus))

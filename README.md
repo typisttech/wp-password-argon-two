@@ -33,7 +33,7 @@ Securely store WordPress user passwords in database with Argon2i hashing and SHA
   - [What have you done with the passwords?](#what-have-you-done-with-the-passwords)
   - [I have installed this plugin. Does it mean my WordPress site is *unhackable*?](#i-have-installed-this-plugin-does-it-mean-my-wordpress-site-is-unhackable)
   - [Did you reinvent the cryptographic functions?](#did-you-reinvent-the-cryptographic-functions)
-  - [Pepper migration look great. Does it mean I can keep as many pepper keys as I want?](#pepper-migration-look-great-does-it-mean-i-can-keep-as-many-pepper-keys-as-i-want)
+  - [Pepper migration look great. Does it mean that I can keep as many pepper keys as I want?](#pepper-migration-look-great-does-it-mean-that-i-can-keep-as-many-pepper-keys-as-i-want)
   - [What if my pepper is compromised?](#what-if-my-pepper-is-compromised)
   - [Is pepper-ing perfect?](#is-pepper-ing-perfect)
   - [Is WordPress' phpass hasher or Bcrypt insecure?](#is-wordpress-phpass-hasher-or-bcrypt-insecure)
