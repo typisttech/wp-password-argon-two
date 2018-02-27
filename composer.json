@@ -1,11 +1,15 @@
 {
     "name": "typisttech/wp-password-argon-two",
-    "description": "WordPress plugin which replaces wp_hash_password and wp_check_password's phpass hasher with PHP 7.2's password_hash and password_verify using Argon2.",
+    "description": "Securely store WordPress user passwords in database with Argon2i hashing and SHA-512 HMAC using PHP's native functions.",
     "keywords": [
         "wordpress",
         "wp",
         "password",
-        "argon2"
+        "argon2",
+        "argon2i",
+        "sha512",
+        "hashing",
+        "hmac"
     ],
     "homepage": "https://github.com/TypistTech/wp-password-argon-two",
     "license": "MIT",
@@ -32,7 +36,8 @@
         "php": "^7.2"
     },
     "require-dev": {
-        "lucatume/wp-browser": "^1.22"
+        "lucatume/wp-browser": "^1.22",
+        "phpunit/phpunit": "^6.5"
     },
     "autoload": {
         "psr-4": {

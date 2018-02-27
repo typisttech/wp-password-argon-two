@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Password Argon Two
  * Plugin URI:  https://typist.tech
- * Description: Replaces wp_hash_password and wp_check_password's phpass hasher with PHP 7.2's password_hash and password_verify using Argon2i.
+ * Description: Securely store WordPress user passwords in database with Argon2i hashing and SHA-512 HMAC using PHP's native functions.
  * Author:      Typist Tech
  * Author URI:  https://typist.tech
  * Version:     0.1.0
@@ -10,6 +10,9 @@
  */
 
 declare(strict_types=1);
+
+// Installing as a Must-use Plugin is the last resort.
+// You should use composer autoload whenever possible.
 
 // Order matters.
 require_once __DIR__ . '/src/ValidatorInterface.php';
