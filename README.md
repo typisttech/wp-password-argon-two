@@ -87,7 +87,7 @@ WP Password Argon Two just works when:
   
 * changing Argon2i options
 
-* using new pepper while moving the ones into `WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS`
+* using new pepper while moving the old ones into `WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS`
 
 User passwords will be rehashed during the next login.
 
