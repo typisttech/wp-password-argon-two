@@ -72,18 +72,24 @@ The purpose of HMAC and Argon2i storage is as follows:
 
 ## Magic Moments
 
-WP Password Argon Two just works when upgrading from:
-* extremely old WordPress versions
+WP Password Argon Two just works when:
+* upgrading from extremely old WordPress versions
 
-  user passwords was hashed with MD5
+  user passwords were hashed with MD5
 
-* recent WordPress versions
+* upgrading from recent WordPress versions
 
-  user passwords was hashed with [phpass](http://openwall.com/phpass) hasher
+  user passwords were hashed with [phpass](http://openwall.com/phpass) hasher
 
-* [WP Password Bcrypt](https://github.com/roots/wp-password-bcrypt)
+* upgrading from [WP Password Bcrypt](https://github.com/roots/wp-password-bcrypt)
 
-  user passwords was hashed with Bcrypt
+  user passwords were hashed with Bcrypt
+  
+* changing Argon2i options
+
+* using new pepper while moving the ones into `WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS`
+
+User passwords will be rehashed during the next login.
 
 ## Requirements
 
@@ -92,7 +98,7 @@ WP Password Argon Two just works when upgrading from:
 Don't blindly trust any random security guide/plugin on the scary internet - including this one!
 
 Do your research:
-* Read the whole [readme](./readme.md)
+* Read the whole [readme](./README.md)
 * Read the [source code](./src)
 * Compare with other [alternatives](#alternatives)
 
@@ -130,7 +136,7 @@ If you don't get the above output, either re-compile PHP 7.2+ with the flag `--w
 
 #### Step 0
 
-Read the whole [readme](./readme.md) and the [source code](./src) before going any further.
+Read the whole [readme](./README.md) and the [source code](./src) before going any further.
 
 #### Step 1
 
@@ -235,6 +241,7 @@ To have a secure WordPress site, you have to keep all these up-to-date:
 * this plugin
 * all other WordPress themes and plugins
 * everything on the server
+* other security practices
 * your mindset
 
 ### Did you reinvent the cryptographic functions?
@@ -243,7 +250,7 @@ Of course not! This plugin use PHP's native functions.
 
 Repeat: Read the [source code](./src)!
 
-### Pepper migration look great. Does it mean I can keep as many pepper keys as I want?
+### Pepper migration look great. Does it mean that I can keep as many pepper keys as I want?
 
 In a sense, yes, you could do that. However, each pepper slows down the login process a little bit.
 
@@ -280,13 +287,13 @@ No. Read [the test](https://github.com/TypistTech/wp-password-argon-two/blob/6ec
 
 Thanks!
 
-Consider writing a blog post, submitting pull requests, [donating](https://typist.tech/donation/) or [hire me](https://typist.tech/contact/) instead.
+Consider writing a blog post, submitting pull requests, [donating](https://typist.tech/donation/) or [hiring me](https://typist.tech/contact/) instead.
 
 ### This plugin isn't on wp.org. Where can I make a complaint?
 
 To be honest, I don't care.
 
-If you really want to share your 1-star review, send me an email - in the first paragraph, state how many time I have told you to read the plugin source code.
+If you really want to share your 1-star review, send me an email - in the first paragraph, state how many times I have told you to read the plugin source code.
 
 ## Alternatives
 
