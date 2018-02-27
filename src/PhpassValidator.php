@@ -9,7 +9,7 @@ use PasswordHash;
 class PhpassValidator implements ValidatorInterface
 {
     /**
-     * For passwords hashed with MD5 on very old WordPress versions.
+     * For passwords hashed with phpass hasher on recent WordPress versions.
      *
      * @param string $password   Plaintext user's password
      * @param string $ciphertext Hash of the user's password to check against.

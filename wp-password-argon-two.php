@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-// Installing as a Must-use Plugin is the last resort.
+// Installing as a must-use plugin is the last resort.
 // You should use composer autoload whenever possible.
 
 // Order matters.
