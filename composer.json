@@ -48,6 +48,10 @@
         ]
     },
     "scripts": {
+        "pre-tag": [
+            "doctoc README.md",
+            "github_changelog_generator --no-verbose"
+        ],
       "test": "codecept run wpunit"
     }
 }
