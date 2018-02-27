@@ -17,7 +17,8 @@ declare(strict_types=1);
 // Order matters.
 require_once __DIR__ . '/src/ValidatorInterface.php';
 require_once __DIR__ . '/src/Validator.php';
-require_once __DIR__ . '/src/WordPressValidator.php';
+require_once __DIR__ . '/src/PhpassValidator.php';
+require_once __DIR__ . '/src/MDFiveValidator.php';
 require_once __DIR__ . '/src/PasswordLock.php';
 require_once __DIR__ . '/src/Manager.php';
 require_once __DIR__ . '/src/ManagerFactory.php';
