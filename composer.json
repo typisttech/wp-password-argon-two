@@ -39,6 +39,9 @@
         "lucatume/wp-browser": "^1.22",
         "phpunit/phpunit": "^6.5"
     },
+    "conflict": {
+        "roots/wp-password-bcrypt": "*"
+    },
     "autoload": {
         "psr-4": {
             "TypistTech\\WPPasswordArgonTwo\\": "src/"
