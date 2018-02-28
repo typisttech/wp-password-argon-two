@@ -127,9 +127,8 @@ If you don't get the above output, either re-compile PHP 7.2+ with the flag `--w
     ```
 * macOS
     ```bash
-    ➜ brew tap homebrew/homebrew-php
     ➜ brew update
-    ➜ brew install php72 --with-argon2
+    ➜ brew install php
     ```
 
 ## Installation
