@@ -39,6 +39,9 @@
         "lucatume/wp-browser": "^1.22",
         "phpunit/phpunit": "^6.5"
     },
+    "suggest": {
+        "typisttech/wp-password-argon-two-env": "Allows you configure WP Password Argon Two with environment variables"
+    },
     "conflict": {
         "roots/wp-password-bcrypt": "*"
     },
