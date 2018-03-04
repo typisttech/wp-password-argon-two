@@ -20,14 +20,16 @@ Securely store WordPress user passwords in database with Argon2i hashing and SHA
   - [Do Your Homework](#do-your-homework)
   - [PHP 7.2+ and compiled `--with-password-argon2`](#php-72-and-compiled---with-password-argon2)
 - [Installation](#installation)
-    - [Step 0](#step-0)
-    - [Step 1](#step-1)
+  - [Step 0](#step-0)
+  - [Step 1](#step-1)
     - [Option A: Via Composer Autoload (Recommended)](#option-a-via-composer-autoload-recommended)
     - [Option B: As a Must-use Plugin (Last Resort)](#option-b-as-a-must-use-plugin-last-resort)
-    - [Step 2](#step-2)
+  - [Step 2](#step-2)
+    - [Option A - Use Constants](#option-a---use-constants)
+    - [Option B - Use Environment Variables](#option-b---use-environment-variables)
 - [Usage](#usage)
-    - [Pepper Migration](#pepper-migration)
-    - [Argon2i Options](#argon2i-options)
+  - [Pepper Migration](#pepper-migration)
+  - [Argon2i Options](#argon2i-options)
 - [Uninstallation](#uninstallation)
 - [Frequently Asked Questions](#frequently-asked-questions)
   - [What have you done with the passwords?](#what-have-you-done-with-the-passwords)
@@ -39,6 +41,7 @@ Securely store WordPress user passwords in database with Argon2i hashing and SHA
   - [Is WordPress' phpass hasher or Bcrypt insecure?](#is-wordpress-phpass-hasher-or-bcrypt-insecure)
   - [Why use Argon2i over the others?](#why-use-argon2i-over-the-others)
   - [Does this plugin has 72-character limit like Bcrypt?](#does-this-plugin-has-72-character-limit-like-bcrypt)
+  - [It looks awesome. Where can I find some more goodies like this?](#it-looks-awesome-where-can-i-find-some-more-goodies-like-this)
   - [This plugin isn't on wp.org. Where can I give a :star::star::star::star::star: review?](#this-plugin-isnt-on-wporg-where-can-i-give-a-starstarstarstarstar-review)
   - [This plugin isn't on wp.org. Where can I make a complaint?](#this-plugin-isnt-on-wporg-where-can-i-make-a-complaint)
 - [Alternatives](#alternatives)
@@ -133,11 +136,11 @@ If you don't get the above output, either re-compile PHP 7.2+ with the flag `--w
 
 ## Installation
 
-#### Step 0
+### Step 0
 
 Read the whole [readme](./README.md) and the [source code](./src) before going any further.
 
-#### Step 1
+### Step 1
 
 This plugin **should not** be installed as a normal WordPress plugin.
 
@@ -168,9 +171,9 @@ Manually copy [`wp-password-argon-two.php`](./wp-password-argon-two.php) and the
 └── wp-password-argon-two.php
 ```
 
-#### Step 2
+### Step 2
 
-##### Option A - Use Constants
+#### Option A - Use Constants
 
 Add these constants into `wp-config.php`:
 ```php
@@ -179,7 +182,7 @@ define('WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS', []);
 define('WP_PASSWORD_ARGON_TWO_OPTIONS', []);
 ```
 
-##### Option B - Use Environment Variables
+#### Option B - Use Environment Variables
 
 Defining the required constants in application code violates [12-factor principle](https://12factor.net/). The [`typisttech/wp-password-argon-two-env`](https://github.com/TypistTech/wp-password-argon-two-env) package allows you to configure with environment variables.
 
@@ -187,7 +190,7 @@ Recommended for all [Trellis](https://github.com/roots/trellis) users.
 
 ## Usage
 
-#### Pepper Migration
+### Pepper Migration
 
 In some cases, you want to change the pepper without changing all user passwords.
 
@@ -201,7 +204,7 @@ define('WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS', [
 
 During the next user login, his/her password will be rehashed with `new-pepper`.
 
-#### Argon2i Options
+### Argon2i Options
 
 > Due to the variety of platforms PHP runs on, the cost factors are deliberately set low as to not accidentally exhaust system resources on shared or low resource systems when using the default cost parameters. Consequently, users should adjust the cost factors to match the system they're working on. As Argon2 doesn't have any "bad" values, however consuming more resources is considered better than consuming less. Users are encouraged to adjust the cost factors for the platform they're developing for.
 >
@@ -289,6 +292,15 @@ Argon2 comes with 3 different modes: Argon2d, Argon2i, Argon2id. Argon2i is the 
 ### Does this plugin has 72-character limit like Bcrypt?
 
 No. Read [the test](https://github.com/TypistTech/wp-password-argon-two/blob/6ec33700ab80e700045063895459212dd52b30b7/tests/wpunit/PasswordLockTest.php#L46-L57).
+
+### It looks awesome. Where can I find some more goodies like this?
+
+* Articles on Typist Tech's [blog](https://typist.tech)
+* [Tang Rufus' WordPress plugins](https://profiles.wordpress.org/tangrufus#content-plugins) on wp.org
+* More projects on [Typist Tech's GitHub profile](https://github.com/TypistTech)
+* Stay tuned on [Typist Tech's newsletter](https://typist.tech/go/newsletter)
+* Follow [Tang Rufus' Twitter account](https://twitter.com/TangRufus)
+* Hire [Tang Rufus](https://typist.tech/contact) to build your next awesome site
 
 ### This plugin isn't on wp.org. Where can I give a :star::star::star::star::star: review?
 
