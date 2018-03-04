@@ -84,7 +84,7 @@ WP Password Argon Two just works when:
 * upgrading from [WP Password Bcrypt](https://github.com/roots/wp-password-bcrypt)
 
   user passwords were hashed with Bcrypt
-  
+
 * changing Argon2i options
 
 * using new pepper while moving the old ones into `WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS`
@@ -171,12 +171,20 @@ Manually copy [`wp-password-argon-two.php`](./wp-password-argon-two.php) and the
 
 #### Step 2
 
+##### Option A - Use Constants
+
 Add these constants into `wp-config.php`:
 ```php
 define('WP_PASSWORD_ARGON_TWO_PEPPER', 'your-long-and-random-pepper');
 define('WP_PASSWORD_ARGON_TWO_FALLBACK_PEPPERS', []);
 define('WP_PASSWORD_ARGON_TWO_OPTIONS', []);
 ```
+
+##### Option B - Use Environment Variables
+
+Defining the required constants in application code violates [12-factor principle](https://12factor.net/). The [`typisttech/wp-password-argon-two-env`](https://github.com/TypistTech/wp-password-argon-two-env) package allows you to configure with environment variables.
+
+Recommended for all [Trellis](https://github.com/roots/trellis) users.
 
 ## Usage
 
