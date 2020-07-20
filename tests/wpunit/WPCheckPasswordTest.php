@@ -24,24 +24,10 @@ class WPCheckPasswordTest extends WPTestCase
         $this->assertCorrectPassword('argon2user', self::DUMMY_PASSWORD, self::ARGON_TWO_HASH);
     }
 
-    private function assertCorrectPassword(string $login, string $password, string $ciphertext)
-    {
-        $isValid = wp_check_password($password, $ciphertext);
-
-        $this->assertTrue($isValid);
-    }
-
     /** @test */
     public function it_checks_incorrect_argon2_hash()
     {
         $this->assertIncorrectPassword('argon2user', 'incorrectPassword', self::ARGON_TWO_HASH);
-    }
-
-    private function assertIncorrectPassword(string $login, string $incorrectPassword, string $ciphertext)
-    {
-        $isValid = wp_check_password($incorrectPassword, $ciphertext);
-
-        $this->assertFalse($isValid);
     }
 
     /** @test */
@@ -49,53 +35,28 @@ class WPCheckPasswordTest extends WPTestCase
     {
         $this->assertRehashToArgon2i('argon2user', self::DUMMY_PASSWORD, self::ARGON_TWO_HASH);
         $user = get_user_by('login', 'argon2user');
-
         $this->assertSame(
             self::ARGON_TWO_HASH,
             $user->user_pass
         );
     }
 
-    private function assertRehashToArgon2i(string $login, string $password, string $ciphertext)
-    {
-        $this->tester->haveInDatabase(
-            $this->tester->grabUsersTableName(),
-            [
-                'user_login' => $login,
-                'user_pass' => $ciphertext
-            ]
-        );
-        $user = get_user_by('login', $login);
-
-        wp_check_password($password, $ciphertext, $user->ID);
-
-        $user = get_user_by('login', $login);
-
-        $this->assertFalse(
-            password_needs_rehash($user->user_pass, PASSWORD_ARGON2I, WP_PASSWORD_ARGON_TWO_OPTIONS),
-            'Password should not need rehashing'
-        );
-    }
-
     /** @test */
     public function it_checks_correct_argon2_outdated_options_hash()
     {
-        $this->assertCorrectPassword('argon2_outdated_options_user', self::DUMMY_PASSWORD,
-            self::ARGON_TWO_OUTDATED_OPTIONS_HASH);
+        $this->assertCorrectPassword('argon2_outdated_options_user', self::DUMMY_PASSWORD, self::ARGON_TWO_OUTDATED_OPTIONS_HASH);
     }
 
     /** @test */
     public function it_checks_incorrect_argon2_outdated_options_hash()
     {
-        $this->assertIncorrectPassword('argon2_outdated_options_user', 'incorrectPassword',
-            self::ARGON_TWO_OUTDATED_OPTIONS_HASH);
+        $this->assertIncorrectPassword('argon2_outdated_options_user', 'incorrectPassword', self::ARGON_TWO_OUTDATED_OPTIONS_HASH);
     }
 
     /** @test */
     public function it_rehash_argon2_outdated_options_hash()
     {
-        $this->assertRehashToArgon2i('argon2_outdated_options_user', self::DUMMY_PASSWORD,
-            self::ARGON_TWO_OUTDATED_OPTIONS_HASH);
+        $this->assertRehashToArgon2i('argon2_outdated_options_user', self::DUMMY_PASSWORD, self::ARGON_TWO_OUTDATED_OPTIONS_HASH);
         $user = get_user_by('login', 'argon2_outdated_options_user');
         $this->assertNotSame(
             self::ARGON_TWO_OUTDATED_OPTIONS_HASH,
@@ -106,22 +67,19 @@ class WPCheckPasswordTest extends WPTestCase
     /** @test */
     public function it_checks_correct_argon2_fallback_pepper_hash()
     {
-        $this->assertCorrectPassword('argon2fallbackpepperuser', self::DUMMY_PASSWORD,
-            self::ARGON_TWO_FALLBACK_PEPPER_HASH);
+        $this->assertCorrectPassword('argon2fallbackpepperuser', self::DUMMY_PASSWORD, self::ARGON_TWO_FALLBACK_PEPPER_HASH);
     }
 
     /** @test */
     public function it_checks_incorrect_argon2_fallback_pepper_hash()
     {
-        $this->assertIncorrectPassword('argon2fallbackpepperuser', 'incorrectPassword',
-            self::ARGON_TWO_FALLBACK_PEPPER_HASH);
+        $this->assertIncorrectPassword('argon2fallbackpepperuser', 'incorrectPassword', self::ARGON_TWO_FALLBACK_PEPPER_HASH);
     }
 
     /** @test */
     public function it_rehash_argon2_fallback_pepper_hash()
     {
-        $this->assertRehashToArgon2i('argon2fallbackpepperuser', self::DUMMY_PASSWORD,
-            self::ARGON_TWO_FALLBACK_PEPPER_HASH);
+        $this->assertRehashToArgon2i('argon2fallbackpepperuser', self::DUMMY_PASSWORD, self::ARGON_TWO_FALLBACK_PEPPER_HASH);
         $user = get_user_by('login', 'argon2fallbackpepperuser');
         $this->assertNotSame(
             self::ARGON_TWO_FALLBACK_PEPPER_HASH,
@@ -181,5 +139,44 @@ class WPCheckPasswordTest extends WPTestCase
     public function it_rehash_phpass_hash()
     {
         $this->assertRehashToArgon2i('phpass_user', self::DUMMY_PASSWORD, self::PHPASS_HASH);
+    }
+
+    private function assertCorrectPassword(string $login, string $password, string $ciphertext)
+    {
+        $this->haveUserInDatabase($login, $ciphertext);
+
+        $isValid = wp_check_password($password, $ciphertext);
+
+        $this->assertTrue($isValid);
+    }
+
+    private function assertIncorrectPassword(string $login, string $incorrectPassword, string $ciphertext)
+    {
+        $this->haveUserInDatabase($login, $ciphertext);
+
+        $isValid = wp_check_password($incorrectPassword, $ciphertext);
+
+        $this->assertFalse($isValid);
+    }
+
+    private function assertRehashToArgon2i(string $login, string $password, string $ciphertext)
+    {
+        $this->tester->haveInDatabase(
+            $this->tester->grabUsersTableName(),
+            [
+                'user_login' => $login,
+                'user_pass' => $ciphertext
+            ]
+        );
+        $user = get_user_by('login', $login);
+
+        wp_check_password($password, $ciphertext, $user->ID);
+
+        $user = get_user_by('login', $login);
+
+        $this->assertFalse(
+            password_needs_rehash($user->user_pass, PASSWORD_ARGON2I, WP_PASSWORD_ARGON_TWO_OPTIONS),
+            'Password should not need rehashing'
+        );
     }
 }
