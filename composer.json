@@ -49,15 +49,29 @@
             "src/pluggable.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "TypistTech\\WPPasswordArgonTwo\\": "tests/wpunit"
+        }
+    },
     "scripts": {
+        "codecept": "codecept",
         "pre-tag": [
             "doctoc README.md"
         ],
-      "test": "echo 'No test for now'"
+        "test": "codecept run wpunit"
     },
     "config": {
         "platform": {
             "php": "7.4.0"
         }
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.1",
+        "codeception/module-phpbrowser": "^1.0.0",
+        "codeception/module-asserts": "^1.0.0",
+        "lucatume/wp-browser": "^2.6",
+        "codeception/module-db": "^1.0",
+        "roots/wordpress": "^5.4"
     }
 }
