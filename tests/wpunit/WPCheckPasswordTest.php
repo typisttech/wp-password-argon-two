@@ -161,13 +161,7 @@ class WPCheckPasswordTest extends WPTestCase
 
     private function assertRehashToArgon2i(string $login, string $password, string $ciphertext)
     {
-        $this->tester->haveInDatabase(
-            $this->tester->grabUsersTableName(),
-            [
-                'user_login' => $login,
-                'user_pass' => $ciphertext
-            ]
-        );
+        $this->haveUserInDatabase($login, $ciphertext);
         $user = get_user_by('login', $login);
 
         wp_check_password($password, $ciphertext, $user->ID);
@@ -175,8 +169,25 @@ class WPCheckPasswordTest extends WPTestCase
         $user = get_user_by('login', $login);
 
         $this->assertFalse(
-            password_needs_rehash($user->user_pass, PASSWORD_ARGON2I, WP_PASSWORD_ARGON_TWO_OPTIONS),
-            'Password should not need rehashing'
+            password_needs_rehash($user->user_pass, PASSWORD_ARGON2I, WP_PASSWORD_ARGON_TWO_OPTIONS)
         );
+    }
+
+    private function haveUserInDatabase(string $login, string $ciphertext)
+    {
+        $this->tester->haveInDatabase(
+            $this->tester->grabUsersTableName(),
+            [
+                'user_login' => $login,
+                'user_pass' => $ciphertext,
+                'user_nicename' => $login,
+                'user_email' => $login . '@wp.dev',
+                'user_registered' => '2018-01-01 00:00:00',
+                'display_name' => $login,
+            ]
+        );
+
+        $user = get_user_by('login', $login);
+        $this->assertSame($ciphertext, $user->user_pass);
     }
 }
