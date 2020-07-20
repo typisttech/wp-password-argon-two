@@ -33,10 +33,7 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.2"
-    },
-    "require-dev": {
-        "lucatume/wp-browser": "^2.0"
+        "php": "^7.4"
     },
     "suggest": {
         "typisttech/wp-password-argon-two-env": "Allows you configure WP Password Argon Two with environment variables"
@@ -56,6 +53,11 @@
         "pre-tag": [
             "doctoc README.md"
         ],
-      "test": "codecept run wpunit"
+      "test": "echo 'No test for now'"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4.0"
+        }
     }
 }

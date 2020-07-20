@@ -10,4 +10,4 @@ workflows:
           name: php-<< matrix.version >>
           matrix:
             parameters:
-              version: ["7.4", "7.3", "7.2"]
+              version: ["7.4"]
