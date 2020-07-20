@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace TypistTech\WPPasswordArgonTwo\Helper;
 
-// here you can define custom actions
-// all public methods declared in helper class will be available in $I
-
 use Codeception\Module;
 
+// here you can define custom actions
+// all public methods declared in helper class will be available in $I
 class Wpunit extends Module
 {
     public function _beforeSuite($settings = [])
@@ -27,7 +26,11 @@ class Wpunit extends Module
         }
 
         if (! defined('WP_PASSWORD_ARGON_TWO_OPTIONS')) {
-            define('WP_PASSWORD_ARGON_TWO_OPTIONS', []);
+            define('WP_PASSWORD_ARGON_TWO_OPTIONS', [
+                'memory_cost' => 1024,
+                'time_cost'   => 2,
+                'threads'     => 1,
+            ]);
         }
     }
 }

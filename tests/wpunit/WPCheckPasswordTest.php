@@ -9,11 +9,10 @@ use Codeception\TestCase\WPTestCase;
 class WPCheckPasswordTest extends WPTestCase
 {
     private const DUMMY_PASSWORD = 'password';
-
     // Pepper is defined in TypistTech\WPPasswordArgonTwo\Helper\Wpunit.
-    private const ARGON_TWO_HASH = '$argon2i$v=19$m=1024,t=2,p=2$NHE3Vm5aeE8vRExBcVpieA$hf23XqOpqT403Ya0U+Bd+4JhYlMAgNEvFx/CisPkrX4';
+    private const ARGON_TWO_HASH = '$argon2i$v=19$m=1024,t=2,p=1$bTFOTHZKc2ZFcWdnZ1dhTQ$xlddU1p/8cD9k0rQ2lOkaoLzIJADL1f4mO2ezH56+pM';
     private const ARGON_TWO_OUTDATED_OPTIONS_HASH = '$argon2i$v=19$m=131072,t=4,p=3$c3drNFJrU21EcjNESUw4ZQ$KboA2MZFKh/O0UEl6T8eMLeEihbWKY6Efeu9TRkbdJM';
-    // Fallback pepper is 'my-second-pepper';
+    // Fallback pepper is 'my-second-pepper'.
     private const ARGON_TWO_FALLBACK_PEPPER_HASH = '$argon2i$v=19$m=1024,t=2,p=2$TUFxYm5XSkJ1b29YLmI5Mg$qn5gHvOEVi1Ixenu7Uax8VWMwu5JW6mM0Ob/kJBwB2A';
     private const BCRYPT_HASH = '$2y$10$EkVBmTI0cbPvPdnTYeVk8eIt6qpHk09C8DB5iZwHbYBu5ot2PyAnq';
     private const MD5_HASH = '5f4dcc3b5aa765d61d8327deb882cf99';
@@ -168,6 +167,7 @@ class WPCheckPasswordTest extends WPTestCase
         wp_check_password($password, $ciphertext, $user->ID);
 
         $user = get_user_by('login', $login);
+
         $this->assertFalse(
             password_needs_rehash($user->user_pass, PASSWORD_ARGON2I, WP_PASSWORD_ARGON_TWO_OPTIONS)
         );
@@ -175,13 +175,19 @@ class WPCheckPasswordTest extends WPTestCase
 
     private function haveUserInDatabase(string $login, string $ciphertext)
     {
-        $this->tester->haveOrUpdateInDatabase('wp_users', [
-            'user_login' => $login,
-            'user_pass' => $ciphertext,
-            'user_nicename' => $login,
-            'user_email' => $login . '@wp.dev',
-            'user_registered' => '2018-01-01 00:00:00',
-            'display_name' => $login,
-        ]);
+        $this->tester->haveInDatabase(
+            $this->tester->grabUsersTableName(),
+            [
+                'user_login' => $login,
+                'user_pass' => $ciphertext,
+                'user_nicename' => $login,
+                'user_email' => $login . '@wp.dev',
+                'user_registered' => '2018-01-01 00:00:00',
+                'display_name' => $login,
+            ]
+        );
+
+        $user = get_user_by('login', $login);
+        $this->assertSame($ciphertext, $user->user_pass);
     }
 }

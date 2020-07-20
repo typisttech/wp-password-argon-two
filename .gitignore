@@ -3,14 +3,12 @@
 /release/
 
 ### Codeception ###
-/codeception.yml
-/tests/*.suite.yml
 /tests/_output/*
 /tests/_support/_generated/
+/wordpress/*
 
 ### Composer ###
 /vendor/
-/composer.lock
 
 ### npm ###
 /node_modules/

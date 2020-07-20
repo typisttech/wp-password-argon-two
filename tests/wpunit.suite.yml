@@ -1,0 +1,28 @@
+actor: WpunitTester
+modules:
+    enabled:
+        - WPDb
+        - WPLoader
+        - \TypistTech\WPPasswordArgonTwo\Helper\Wpunit
+    config:
+        WPDb:
+            dsn: 'mysql:host=0.0.0.0:33060;dbname=wordpress'
+            user: 'wordpress'
+            password: 'wordpress'
+            dump: 'tests/_data/dump.sql'
+            populate: true
+            cleanup: false
+            waitlock: 10
+            url: 'http://localhost:8000'
+            urlReplacement: true
+            tablePrefix: 'wp_'
+        WPLoader:
+            loadOnly: false
+            multisite: false
+            wpRootFolder: "wordpress"
+            dbName: "wordpress"
+            dbHost: "0.0.0.0:33060"
+            dbUser: "wordpress"
+            dbPassword: "wordpress"
+            tablePrefix: "wp_"
+            domain: "localhost:8000"

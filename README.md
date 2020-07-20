@@ -51,7 +51,6 @@ Securely store WordPress user passwords in database with Argon2i hashing and SHA
   - [Want to help in other way? Want to be a sponsor?](#want-to-help-in-other-way-want-to-be-a-sponsor)
 - [Developing](#developing)
 - [Feedback](#feedback)
-- [Change Log](#change-log)
 - [Security](#security)
 - [Credits](#credits)
 - [License](#license)
@@ -355,10 +354,6 @@ $ composer test
 **Please provide feedback!** We want to make this library useful in as many projects as possible.
 Please submit an [issue](https://github.com/TypistTech/wp-password-argon-two/issues/new) and point out what you do and don't like, or fork the project and make suggestions.
 **No issue is too small.**
-
-## Change Log
-
-Please see [CHANGELOG](./CHANGELOG.md) for more information on what has changed recently.
 
 ## Security
 

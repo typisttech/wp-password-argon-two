@@ -33,7 +33,7 @@ class PasswordLockTest extends WPTestCase
     /** @test */
     public function it_hashes_with_argon2i()
     {
-        $passwordLock = new PasswordLock(self::DUMMY_PEPPER, []);
+        $passwordLock = new PasswordLock(self::DUMMY_PEPPER, WP_PASSWORD_ARGON_TWO_OPTIONS);
 
         $ciphertext = $passwordLock->hash(self::DUMMY_PASSWORD);
 
@@ -94,7 +94,7 @@ class PasswordLockTest extends WPTestCase
     public function it_does_not_need_rehash_when_options_unchanged()
     {
         $options = [
-            'memory_cost' => 1 << 17, // 128 Mb
+            'memory_cost' => 11024,
             'time_cost' => 2,
             'threads' => 1,
         ];
