@@ -1,5 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 namespace TypistTech\WPPasswordArgonTwo;
+
+use Codeception\Actor;
 
 /**
  * Inherited Methods
@@ -16,11 +21,11 @@ namespace TypistTech\WPPasswordArgonTwo;
  *
  * @SuppressWarnings(PHPMD)
 */
-class WpunitTester extends \Codeception\Actor
+class WpunitTester extends Actor
 {
     use _generated\WpunitTesterActions;
 
-    /**
+    /*
      * Define custom actions here
      */
 }
