@@ -26,5 +26,3 @@ modules:
             dbPassword: "wordpress"
             tablePrefix: "wp_"
             domain: "localhost:8000"
-#            plugins: ['hello.php', 'my-plugin/my-plugin.php']
-#            activatePlugins: ['hello.php', 'my-plugin/my-plugin.php']
