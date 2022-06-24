@@ -5,7 +5,7 @@
  * Description: Securely store WordPress user passwords in database with Argon2i hashing and SHA-512 HMAC using PHP's native functions.
  * Author:      Typist Tech
  * Author URI:  https://typist.tech
- * Version:     0.2.0
+ * Version:     0.2.2
  * Licence:     MIT
  */
 
