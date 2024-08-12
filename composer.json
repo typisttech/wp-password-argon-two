@@ -51,5 +51,6 @@
     },
     "scripts": {
       "test": "codecept run wpunit"
-    }
+    },
+    "abandoned": "roots/wp-password-bcrypt"
 }
