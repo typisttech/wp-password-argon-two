@@ -2,7 +2,7 @@
 > [WP Password Argon Two](https://github.com/typisttech/wp-password-argon-two) has been **abandoned**.
 > 
 > If you want to maintain a fork of [WP Password Argon Two](https://github.com/typisttech/wp-password-argon-two), read this [blog post](https://blog.ircmaxell.com/2015/03/security-issue-combining-bcrypt-with.html) ([Wayback Machine snaptshot](https://web.archive.org/web/20240722115642/https://blog.ircmaxell.com/2015/03/security-issue-combining-bcrypt-with.html)).
-> Otherwise, use [roots/wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt?tab=readme-ov-file).
+> Otherwise, use [roots/wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt).
 
 # WP Password Argon Two
 
